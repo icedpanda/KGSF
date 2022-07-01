@@ -161,7 +161,7 @@ class CrossModel(nn.Module):
         self.dbpedia_RGCN=RGCNConv(opt['n_entity'], self.dim, self.n_relation, num_bases=opt['num_bases'])
         #self.concept_RGCN=RGCNConv(opt['n_concept']+1, self.dim, self.n_con_relation, num_bases=opt['num_bases'])
         self.concept_edge_sets=concept_edge_list4GCN()
-        self.concept_GCN=GCNConv(self.dim, self.dim)
+        self.concept_GCN=GCNConv(in_channels=self.dim, out_channels=self.dim)
 
         #self.concept_GCN4gen=GCNConv(self.dim, opt['embedding_size'])
 
@@ -537,6 +537,9 @@ class CrossModel(nn.Module):
         return loss
 
     def save_model(self):
+        # torch.save() expects an existing directory
+        if not os.path.isdir("saved_model"):
+            os.mkdir("saved_model")
         torch.save(self.state_dict(), 'saved_model/net_parameter1.pkl')
 
     def load_model(self):
