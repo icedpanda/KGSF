@@ -10,9 +10,14 @@ In this paper, we propose KGSF model, which first fuses the semantic between wor
 ![](./figure1.png)
 
 # Environment
-pytorch==1.3.0, torch_geometric==1.3.2
 
-To be honest, most of errors derive from the wrong installation of the two packages
+- Python 3.6
+- PyTorch == 1.7.1
+
+> This is the support branch for me to reproduce the results of this paper.
+> You should be able to use the same environment from my forked KBRD repository.
+> https://github.com/icedpanda/KGSF
+
 
 # Notation
 The word embedding file **word2vec_redial.npy** can be produced by the following function dataset.prepare_word2vec(), or directly download from the google netdisk https://drive.google.com/file/d/1BzwGgbUBilaEZXAu7e1SlvxSwcAfVe2w/view?usp=sharing, ***Chinese friends need VPN to download this file***.
