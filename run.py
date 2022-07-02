@@ -678,18 +678,32 @@ class TrainLoop_fusion_gen():
         """
         self.optimizer.zero_grad()
 
+
+def seed_everything(seed: int):
+    import random, os
+    import numpy as np
+    import torch
+
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+
+
 if __name__ == '__main__':
     args=setup_args().parse_args()
     print(vars(args))
+    seed_everything(42)
     if args.is_finetune==False:
         loop=TrainLoop_fusion_rec(vars(args),is_finetune=False)
-        #loop.model.load_model()
         loop.train()
     else:
         loop=TrainLoop_fusion_gen(vars(args),is_finetune=True)
-        #loop.train()
         loop.model.load_model()
-        #met = loop.val(True)
         loop.train()
     met=loop.val(True)
+    # loop=TrainLoop_fusion_gen(vars(args),is_finetune=True)
+    # loop.model.load_model()
+    # loop.val(is_test=True)
     #print(met)
