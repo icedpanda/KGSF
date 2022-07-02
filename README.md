@@ -16,7 +16,7 @@ In this paper, we propose KGSF model, which first fuses the semantic between wor
 
 > This is the support branch for me to reproduce the results of this paper.
 > You should be able to use the same environment from my forked KBRD repository.
-> https://github.com/icedpanda/KGSF
+> https://github.com/icedpanda/KBRD
 
 
 # Notation
