@@ -397,6 +397,8 @@ class CrossModel(nn.Module):
         con_user_emb,attention=self.self_attn(con_user_emb,con_emb_mask.cuda())
         user_emb=self.user_norm(torch.cat([con_user_emb,db_user_emb],dim=-1))
         uc_gate = F.sigmoid(self.gate_norm(user_emb))
+        # average gate values
+        print(torch.mean(uc_gate))
         user_emb = uc_gate * db_user_emb + (1 - uc_gate) * con_user_emb
         entity_scores = F.linear(user_emb, db_nodes_features, self.output_en.bias)
         #entity_scores = scores_db * gate + scores_con * (1 - gate)
